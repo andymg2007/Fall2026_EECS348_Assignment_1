@@ -6,7 +6,7 @@ Inputs: User guesses entered via standard input (stdin).
 Output: Terminal output providing feedback on guesses, status messages, 
          and game result.
 Collaborators: None
-Other Sources: ChatGPT for help creating error catching in c
+Other Sources: Claude for creating the original file, ChatGPT for help creating error catching in c
 Author: Andy Garcia
 Creation Date: September 8, 2026
 Revision Date: September 8, 2026
@@ -49,7 +49,7 @@ int main(void){  // initialize main
             i--; // subtracts 1 from i so out of bounds guess does not count as an attempt
             continue; // skips rest of loop and restarts next iteration
         }
-
+        // This block was in the original code by Claude
         if (guess == secret) {   // checks if guess is equal to secret
             printf("Correct! You win!\n");   // prints winning message to the user
             won = 1;  // sets variable won equal to 1
@@ -60,7 +60,7 @@ int main(void){  // initialize main
             printf("Too high! Try again.\n");    // prints message to user that guess was too high
         }
     }
-
+    // Original code made by Claude
     if (!won) {  // checks if variable won is equal to 0
         printf("You lose! The number was %d.\n", secret);    // prints losing message and reveals secret to the user
     }
