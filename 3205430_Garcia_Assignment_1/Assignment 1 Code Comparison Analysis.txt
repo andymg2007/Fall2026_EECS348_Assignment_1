@@ -1,0 +1,134 @@
+﻿Andy Garcia
+Assignment 1
+EECS 348
+10/8
+
+
+I compared code from ChatGPT and Claude on google chrome through their websites. 
+The prompt was copied from the assignment instruction given to both:
+
+
+Objective
+Write a C program that picks a secret number between 1 and 10.
+The user gets up to 3 tries to guess the number.
+Requirements
+• Use a fixed secret number (for example, 7).
+• Use printf to prompt the user and scanf to read their
+guess.
+• Use a while or for loop to let the user guess up to 3 times.
+• Use if-else statements to check if the guess is too high,
+too low, or correct.
+• Stop the loop immediately if the user guesses the correct
+number.
+• Print a final win or lose message.
+Example Output
+text
+Guess a number between 1 and 10.
+Attempt 1/3. Enter your guess: 5
+Too low! Try again.
+Attempt 2/3. Enter your guess: 8
+Too high! Try again.
+Attempt 3/3. Enter your guess: 7
+Correct! You win!
+
+
+ChatGPT’s Code:
+
+
+#include <stdio.h>
+
+
+int main() {
+    int secretNumber = 7;
+    int guess;
+    int attempts = 0;
+    int correct = 0;
+
+
+    printf("Guess a number between 1 and 10.\n");
+
+
+    while (attempts < 3) {
+        printf("Attempt %d/3. Enter your guess: ", attempts + 1);
+        scanf("%d", &guess);
+
+
+        if (guess == secretNumber) {
+            printf("Correct! You win!\n");
+            correct = 1;
+            break;
+        }
+        else if (guess < secretNumber) {
+            printf("Too low! Try again.\n");
+        }
+        else {
+            printf("Too high! Try again.\n");
+        }
+
+
+        attempts++;
+    }
+
+
+    if (correct == 0) {
+        printf("You lose! The secret number was %d.\n", secretNumber);
+    }
+
+
+    return 0;
+}
+
+
+
+
+Claude’s Code:
+
+
+#include <stdio.h>
+
+
+int main(void) {
+    int secret = 7;      // fixed secret number
+    int guess;
+    int attempts = 3;
+    int won = 0;          // flag: 0 = not guessed yet, 1 = guessed correctly
+
+
+    printf("Guess a number between 1 and 10.\n");
+
+
+    for (int i = 1; i <= attempts; i++) {
+        printf("Attempt %d/%d. Enter your guess: ", i, attempts);
+        scanf("%d", &guess);
+
+
+        if (guess == secret) {
+            printf("Correct! You win!\n");
+            won = 1;
+            break;          // stop the loop immediately
+        } else if (guess < secret) {
+            printf("Too low! Try again.\n");
+        } else {
+            printf("Too high! Try again.\n");
+        }
+    }
+
+
+    if (!won) {
+        printf("You lose! The number was %d.\n", secret);
+    }
+
+
+    return 0;
+}
+
+
+e) 
+1. Correctness: Both codes are correct and execute the prompt correctly on the most basic level.
+2. Time Complexity: Both codes run at O(1) because they will loop 3 times or less no matter what each time. The claude code uses a for loop to run through the options and we learned that on the assembly level a for loop can run slightly faster.
+3. Space Complexity: Both programs use O(1) space and use the same number of variables so there is no difference enough to matter.
+4. For maintainability claude code uses a variable attempts at the start allowing the amount of attempts to change easier, the chatgpt code, hard codes the attempts at three within the loop. 
+f) This led me to choose Claude’s code because it wins in time complexity and maintainability. Claude allows the user to adjust the attempts without editing multiple lines of code as well as using a for loop which is more effective for a known iteration count.
+g) To improve the code first I add some fail safes for improved maintainability in case the user inputs an invalid input. 
+To improve correctness I would add a const mark in front of the secret and attempts variable to avoid confusion if anyone adjusts the code
+For speed and space I could not find any way to improve them as it has the minimum number of variables for the program to work correctly and runs at the most efficient speed.
